@@ -7,7 +7,13 @@ var Engine = function(board, config) {
 	var high = config.high || 120;
 	var pin = config.pin || 'D0';
 	var speed = low;
-	var motor = new five.Motor(pin);
+	
+	var motor = new five.Motor({
+		pin: pin,
+		board: board
+	});
+
+	board.repl.inject({ motor: motor });
 
 	function box(value) {
 		if(value <= low) return low;
@@ -36,8 +42,6 @@ var Engine = function(board, config) {
 		console.log('decelerate to ' + speed);
 		go(speed);
 	}
-
-	board.repl.inject({ motor: motor });
 
 	return {
 		accelerate: accelerate,
