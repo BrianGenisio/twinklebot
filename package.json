@@ -1,0 +1,15 @@
+{
+  "name": "twinklebot",
+  "version": "0.0.0",
+  "description": "Robot I am building with Maia (aka Twinkle)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Genisio",
+  "license": "ISC",
+  "dependencies": {
+    "johnny-five": "^0.7.47",
+    "spark-io": "^0.5.0"
+  }
+}
