@@ -6,33 +6,36 @@ var Spark = require('spark-io');
 var TwinkleCar = require('./twinklecar');
 
 var stdin = process.openStdin(); 
-
 process.stdin.setRawMode();   
 
 var board = new five.Board({
-  io: new Spark({
-    token: token,
-    deviceId: device
-  })
+	io: new Spark({
+		token: token,
+		deviceId: device
+	})
 });
-
-var car;
 
 board.on("ready", function() {
-	car = new TwinkleCar(board);
-    console.log('OK, Drive!!!!');
+	var car = new TwinkleCar(board);
+
+	stdin.on('keypress', function(chunk, key) {
+		handleKeypress(key, car);
+	});
+
+	console.log('OK, Drive!!!!');
 });
 
-stdin.on('keypress', function (chunk, key) {
+function handleKeypress(key, car) {
 	if(!key) return;
 
-  	switch(key.name) {
-  		case 'w': 
-  			car.accelerate();
-  			break;
+	switch(key.name) {
+		case 'w': 
+			car.accelerate();
+			break;
 
-  		case 's':
-  			car.decelerate();
-  			break;
-  	}
-});
+		case 's':
+			car.decelerate();
+			break;
+	}
+}
+
