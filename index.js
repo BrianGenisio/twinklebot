@@ -15,19 +15,29 @@ var board = new five.Board({
 	})
 });
 
+var activated = false;
+
 board.on("ready", function() {
 	var car = new TwinkleCar(board);
 
 	stdin.on('keypress', function(chunk, key) {
+		if(chunk === '+') {
+			activated = true;
+			console.log('OK, Drive!!!!');
+			return;
+		}
+
+		if(!activated) return;
+
 		handleKeypress(key, car);
 	});
 
-	console.log('OK, Drive!!!!');
+	console.log('Car is awaiting instructions...');
 });
 
 function handleKeypress(key, car) {
 	if(!key) return;
-
+	
 	switch(key.name) {
 		case 'w': 
 			car.accelerate();
@@ -35,6 +45,14 @@ function handleKeypress(key, car) {
 
 		case 's':
 			car.decelerate();
+			break;
+
+		case 'd':
+			car.right();
+			break;
+
+		case 'a':
+			car.left();
 			break;
 	}
 }

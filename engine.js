@@ -4,7 +4,7 @@ var Engine = function(board, config) {
 	config = config || {};
 	var step = config.step || 5;
 	var low = config.low || 75;
-	var high = config.high || 120;
+	var high = config.high || 140;
 	var pin = config.pin || 'D0';
 	var speed = low;
 	
